@@ -110,3 +110,51 @@ savefig("p6_ventas_genero_mes.png")
 print("Se generaron las graficas 4 y 5:", OUTPUT_DIR)
 print("4) p6_unidades_rango_precio_categoria.png")
 print("5) p6_ventas_genero_mes.png")
+
+
+# ==========================================================
+# 3e. CANTIDAD DE VENTAS POR MÉTODO DE PAGO Y CATEGORÍA
+# ==========================================================
+# Consulta SQL
+query_pago_categoria = """
+    SELECT
+        v.metodo_pago,
+        v.categoria,
+        COUNT(*) as cantidad_ventas
+    FROM ventas v
+    GROUP BY v.metodo_pago, v.categoria
+    ORDER BY v.metodo_pago, cantidad_ventas DESC;
+"""
+df_pago_categoria = pd.read_sql(query_pago_categoria, engine)
+
+
+
+fig, ax = plt.subplots(figsize=(12, 6))
+
+categorias = df_pago_categoria['categoria'].unique()
+metodos_pago = df_pago_categoria['metodo_pago'].unique()
+
+x = range(len(metodos_pago))
+ancho_barra = 0.15
+colores = plt.cm.Set3(range(len(categorias)))
+
+for i, categoria in enumerate(categorias):
+    datos_categoria = df_pago_categoria[df_pago_categoria['categoria'] == categoria]
+    valores = []
+    for metodo in metodos_pago:
+        valor = datos_categoria[datos_categoria['metodo_pago'] == metodo]['cantidad_ventas'].values
+        valores.append(valor[0] if len(valor) > 0 else 0)
+    
+    posiciones = [p + i * ancho_barra for p in x]
+    ax.bar(posiciones, valores, ancho_barra, label=categoria, color=colores[i], alpha=0.8)
+
+ax.set_xlabel('Método de Pago')
+ax.set_ylabel('Cantidad de Ventas')
+ax.set_title('Ventas por Método de Pago y Categoría')
+ax.set_xticks([p + ancho_barra * (len(categorias) - 1) / 2 for p in x])
+ax.set_xticklabels(metodos_pago)
+ax.legend(title='Categoría', bbox_to_anchor=(1.05, 1), loc='upper left')
+
+plt.tight_layout()
+savefig("ventas_por_pago_categoria.png")
+print(f"6. ventas_por_pago_categoria.png \n")
