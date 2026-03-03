@@ -171,7 +171,8 @@ ventas_genero_pivot = ventas_genero.pivot_table(
 
 ventas_genero_pivot = ventas_genero_pivot.rename(columns={
     "Femenino": "Cantidad_Mujeres",
-    "Masculino": "Cantidad_Hombres"
+    "Masculino": "Cantidad_Hombres",
+    "No especifica":"Cantidad_NS"
 })
 
 print(ventas_genero_pivot)
@@ -180,15 +181,22 @@ print(ventas_genero_pivot)
 productos = ventas_genero_pivot["producto"]
 cantidad_mujeres = ventas_genero_pivot["Cantidad_Mujeres"]
 cantidad_hombres = ventas_genero_pivot["Cantidad_Hombres"]
+cantidad_ns = ventas_genero_pivot["Cantidad_NS"]
 
 # Posición de las barras
 x = np.arange(len(productos))
-width = 0.35  # ancho de cada barra
+width = 0.25  # ancho de cada barra
 
 # Crear la gráfica
 plt.figure(figsize=(14,7))
-plt.bar(x - width/2, cantidad_mujeres, width, label="Mujeres", color="pink")
-plt.bar(x + width/2, cantidad_hombres, width, label="Hombres", color="skyblue")
+plt.bar(x - width, cantidad_mujeres, width,
+        label="Mujeres", color="pink")
+
+plt.bar(x, cantidad_hombres, width,
+        label="Hombres", color="skyblue")
+
+plt.bar(x + width, cantidad_ns, width,
+        label="No especifica", color="gray")
 
 # Configuración de ejes y etiquetas
 plt.xticks(x, productos, rotation=45, ha="right")
