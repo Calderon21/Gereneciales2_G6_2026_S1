@@ -53,6 +53,18 @@ Lo interesante de esto es ver que aunque los vestido causales estan entre los ma
 Lo mismo se puede decir de los relojes que son accesorio al igual que los bolsos de mano.  
 
 ### 4. Segmentación de clientes 
+**a.1 Productos más vendidos segmentados por edad**
+![](./source/img-4/ventas_por_edad.png)
+
+**a.2 Poder de compra de grupos segmentados por edad**
+![](./source/img-4/poder_compra_edad.png)
+
+**b.1 Comparación de comportamiento de compras por género y producto**
+![](./source/img-4/ventas_por_genero_producto.png)
+
+**b.2 Comparación de comportamiento de compras total por género**
+![](./source/img-4/ventas_por_genero.png)
+
 ### 5. Análisis de correlación 
 ### 6. Visualización de datos: 
 **i. Productos vendidos por mes y región**  
@@ -71,6 +83,7 @@ Lo mismo se puede decir de los relojes que son accesorio al igual que los bolsos
 ![](./source/img-6/ventas_por_pago_categoria.png)
 
 **vii. Promedio del total de la compra por edad** 
+![](./source/img-6/p6_promedio_total_compra_edad.png)
 
 ## 7. CONCLUSIONES Y RECOMENDACIONES
 
