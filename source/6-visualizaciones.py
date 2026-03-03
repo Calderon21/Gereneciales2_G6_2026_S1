@@ -158,3 +158,39 @@ ax.legend(title='Categoría', bbox_to_anchor=(1.05, 1), loc='upper left')
 plt.tight_layout()
 savefig("ventas_por_pago_categoria.png")
 print(f"6. ventas_por_pago_categoria.png \n")
+
+
+# ==========================================================
+# vii. Promedio del total de la compra por edad
+# ==========================================================
+query_compra_edad = """
+    SELECT
+        v.total,
+        v.cantidad,
+        c.edad,
+        c.genero,
+        v.nombre_producto as producto,
+        v.precio
+    FROM ventas v
+    JOIN clientes c ON v.id_cliente = c.id_cliente;
+"""
+
+df_compras_promedio_edad = pd.read_sql(query_compra_edad, engine)
+
+promedio_por_edad = df_compras_promedio_edad.groupby("edad").agg(
+    promedio_total=("total", "mean"),
+    total_ventas=("total", "sum"),
+    numero_compras=("total", "count")
+).reset_index()
+
+print(promedio_por_edad.sort_values("edad"))
+
+plt.figure(figsize=(8,6))
+plt.bar(promedio_por_edad["edad"],
+        promedio_por_edad["promedio_total"],
+        color="skyblue")
+
+plt.xlabel("Rango de Edad")
+plt.ylabel("Promedio de Compra (Q)")
+plt.title("Promedio del total de compra por edad")
+savefig("p6_promedio_total_compra_edad.png")
