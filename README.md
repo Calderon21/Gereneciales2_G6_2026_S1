@@ -80,12 +80,17 @@ Lo mismo se puede decir de los relojes que son accesorio al igual que los bolsos
 ![](./source/img-6/p6_ventas_genero_mes.png)
 
 **vi. Cantidad de ventas realizadas por método de pago y categoría**  
-![](./source/img-6/ventas_por_pago_categoria.png)
+![](./source/img-6/ventas_por_pago_categoria.png)  
+Se puede observar que la mayoría de clientes prefieren utilizar la tarjeta de crédito como método de pago, sin importan la categoría, esto podría deberse a la facilidad de uso que tiene. Mientras el resto de métodos de pago se mantiene muy cercanos entre si.  
 
 **vii. Promedio del total de la compra por edad** 
 ![](./source/img-6/p6_promedio_total_compra_edad.png)
 
 ## 7. CONCLUSIONES Y RECOMENDACIONES
+### Conclusiones
+
+
+### Recomendaciones
 
 ## 8. PREGUNTAS
 **a. ¿Cómo podrían los insights obtenidos ayudar a diferenciarse de la competencia?**  
@@ -97,6 +102,8 @@ Lo mismo se puede decir de los relojes que son accesorio al igual que los bolsos
 **d. ¿Qué datos adicionales recomendarían recopilar para obtener insights aún más valiosos en el futuro?**  
 
 **e. ¿Qué categorías de producto generan mayor ingreso promedio por orden y cómo impacta esto en la estrategia comercial?**  
+La categoria de chaquetas es la que mas ingresos en promedio por orden genera, aunque la diferencia con el resto de las categorias es pequeña. Se podria integrar el resto de categorias en esperiencia de compra. 
+Al realizar la compra de un objeto se le podria brindar al cliente sugerencias de comprar de otros produtos.
 
 **f. ¿Existen clientes recurrentes y qué porcentaje de las ventas totales representan?** 
 
