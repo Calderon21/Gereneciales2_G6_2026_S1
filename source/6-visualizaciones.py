@@ -3,6 +3,7 @@ import pandas as pd
 from dotenv import load_dotenv
 from sqlalchemy import create_engine
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 OUTPUT_DIR = "img-6"  
@@ -194,3 +195,42 @@ plt.xlabel("Rango de Edad")
 plt.ylabel("Promedio de Compra (Q)")
 plt.title("Promedio del total de compra por edad")
 savefig("p6_promedio_total_compra_edad.png")
+
+# ==========================================================
+# ii Distribución de precios por categoría
+# ==========================================================
+df_violin = df.dropna(subset=["precio", "categoria"]).copy()
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
+
+# Violin plot
+parts = ax1.violinplot([df_violin[df_violin['categoria'] == cat]['precio'].values 
+                         for cat in sorted(df_violin['categoria'].unique())],
+                        positions=range(len(df_violin['categoria'].unique())),
+                        showmeans=True, showmedians=True)
+
+ax1.set_xticks(range(len(df_violin['categoria'].unique())))
+ax1.set_xticklabels(sorted(df_violin['categoria'].unique()), rotation=45, ha='right')
+ax1.set_ylabel('Precio ($)', fontsize=10)
+ax1.set_title('Distribución de Precios por Categoría (Violin Plot)', fontsize=11, fontweight="bold")
+ax1.grid(True, alpha=0.3, axis='y')
+
+# Box plot al lado
+sns.boxplot(data=df_violin, x='categoria', y='precio', ax=ax2, palette="Set2")
+ax2.set_xlabel('Categoría', fontsize=10)
+ax2.set_ylabel('Precio ($)', fontsize=10)
+ax2.set_title('Distribución de Precios por Categoría (Box Plot)', fontsize=11, fontweight="bold")
+ax2.tick_params(axis='x', rotation=45)
+ax2.grid(True, alpha=0.3, axis='y')
+
+plt.tight_layout()
+plt.savefig(os.path.join(OUTPUT_DIR, "p6_distribucion_precios_violin_box.png"), dpi=200)
+plt.close()
+print(f"p6_distribucion_precios_violin_box.png")
+
+# Estadísticas de precios por categoría
+print("\n" + "="*60)
+print("ESTADÍSTICAS DE PRECIOS POR CATEGORÍA")
+print("="*60)
+precios_stats = df_violin.groupby('categoria')['precio'].agg(['count', 'mean', 'median', 'std', 'min', 'max'])
+print(precios_stats.round(2))
